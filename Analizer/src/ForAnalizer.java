@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ForAnalizer {
     public static int getForIterCount(String str)  {
@@ -18,8 +19,10 @@ public class ForAnalizer {
             int index = sb.indexOf("{");
             sb.insert(index + 1, "\ncount++;");
             sb.insert(0, "{\nint count=0;\n");
-            sb.insert(sb.length()-2, "if(count==1000000) {break;}");
+            int last = sb.lastIndexOf("}");
+            sb.insert(last, "if(count==1000000) {break;}");
             sb.insert(sb.length(), "\nSystem.out.println(\"count=\"+count);\n}");
+            System.out.println(sb);
             jShell.eval(sb.toString());
             BufferedReader bf=new BufferedReader(new FileReader("Analizer/src/Files/count.txt"));
             var a=bf.lines().filter(st->st.contains("count=")).findAny().orElse("Error");
