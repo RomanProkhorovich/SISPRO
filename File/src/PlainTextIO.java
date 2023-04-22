@@ -2,10 +2,9 @@ import java.io.*;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class PlainTextIO implements FileIO {
-    @Override
-    public ArrayList<MyFileRecord> getRecords(File file) {
-        ArrayList<MyFileRecord> res=new ArrayList<>();
+public class PlainTextIO  {
+    public ArrayList<PlainTextRecord> getRecords(File file) {
+        ArrayList<PlainTextRecord> res=new ArrayList<>();
         try(BufferedReader reader=new BufferedReader(new FileReader(file))){
             reader.lines().forEach(x->{
                 var a=x.split(" ");
@@ -19,8 +18,7 @@ public class PlainTextIO implements FileIO {
         }
     }
 
-    @Override
-    public void saveRecord(File file, MyFileRecord data) {
+    public void saveRecord(File file, PlainTextRecord data) {
         try(BufferedWriter bw=new BufferedWriter(new FileWriter(file))) {
             bw.append("\n")
                     .append(data.toString());

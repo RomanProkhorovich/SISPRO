@@ -1,9 +1,25 @@
+/**
+ * Класс для выполнения низкоуровневого кода. Язык: asm
+ */
 public class Division {
     static
     {
         System.load("D:\\univer\\SISPRO\\LowLevel\\src\\c_asm_jni.dll");
     }
+
+    /**
+     * @param arg1 делимое
+     * @param arg2 делитель
+     * @return результат целочесленного деления
+     */
     public static native int getDiv(int arg1, int arg2);
+
+
+    /**
+     * @param arg1 Первый аргумент
+     * @param arg2 Второй аргумент
+     * @return результат вычислений
+     */
     public static native int ByteOr(int arg1, int arg2);
 
     /*

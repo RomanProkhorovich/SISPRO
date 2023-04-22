@@ -4,7 +4,7 @@ import java.util.Date;
  * store one Plain Text record: access date, file URL, access mode(public or private)
  * @author Roman Prohorovvich,Viktoria Andreeva
  */
-public class PlainTextRecord implements MyFileRecord {
+public class PlainTextRecord implements MyFileRecord  {
     /**
      * field to store date of access to file
      */
@@ -74,7 +74,7 @@ public class PlainTextRecord implements MyFileRecord {
      * @return a copy of this record
      */
     @Override
-    public MyFileRecord clone() throws CloneNotSupportedException {
+    public PlainTextRecord clone() throws CloneNotSupportedException {
         PlainTextRecord rec= (PlainTextRecord) super.clone();
         rec.accessDate= (Date) accessDate.clone();
         rec.path=new String(path);
