@@ -1,9 +1,10 @@
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String divPath = "D:\\univer\\SISPRO\\TestModule\\div.jar";
+       /* String divPath = "D:\\univer\\SISPRO\\TestModule\\div.jar";
         URL[] urls = {new URL("jar:file:" + divPath + "!/")};
         URLClassLoader fuckingAsmClassLoaderYobEgoMat = URLClassLoader.newInstance(urls);
         Class c = fuckingAsmClassLoaderYobEgoMat.loadClass("Division");
@@ -20,5 +21,12 @@ public class Main {
                           }
                           while (true);
                 """));
-    }
+*/
+
+        String s = "D:\\univer\\SISPRO\\TestModule\\FilesDB-0.0.1-SNAPSHOT.jar";
+        URL[] urls1 = {new URL("jar:file:" + s + "!/")};
+        URLClassLoader urlClassLoader = URLClassLoader.newInstance(urls1);
+        System.out.println(Arrays.toString(urls1));
+        Class countAnalizer = urlClassLoader.loadClass("CSVController");
+            }
 }
