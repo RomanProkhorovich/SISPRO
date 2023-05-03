@@ -46,28 +46,49 @@ public class lib {
 
     }
 
-    public static long analize(String str)  {
+    public static void main(String[] args) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         String analPath = "D:\\univer\\SISPRO\\TestModule\\Anal.jar";
 
+
+            URL[] analUrls = {new URL("jar:file:" + analPath + "!/")};
+            URLClassLoader anaalCl = URLClassLoader.newInstance(analUrls);
+            Class cass = anaalCl.loadClass("CountAnalizer");
+            var iterCount =(Integer) (cass.getMethod("getIterCount", String.class).invoke(null,
+                 """
+                 do {
+                              System.out.println("fuck asm");
+                          }
+                          while (true);
+                """));
+
+            if (iterCount==1_000_000)
+                throw new TooMuchIterations();
+
+    }
+
+    public static long analyze(String str)  throws TooMuchIterations {
+        String analPath = "D:\\univer\\SISPRO\\TestModule\\Anal.jar";
+        int iterCount;
         try {
             URL[] analUrls = {new URL("jar:file:" + analPath + "!/")};
             URLClassLoader anaalCl = URLClassLoader.newInstance(analUrls);
             Class cass = anaalCl.loadClass("CountAnalizer");
-            var iterCount =(Long)(cass.getMethod("getIterCount", String.class).invoke(null, str));
+            iterCount =(Integer) (cass.getMethod("getIterCount", String.class).invoke(null, str));
                  /*"""
                  do {
                               System.out.println("fuck asm");
                           }
                           while (true);
                 """);*/
-            if (iterCount==1_000_000)
 
+            if (iterCount==1_000_000)
                 throw new TooMuchIterations();
             return iterCount;
+        } catch (MalformedURLException | ClassNotFoundException | InvocationTargetException | IllegalAccessException |
+                 NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
-        catch (Exception e) {
-            throw new ChocolateException();
-        }
+
     }
     public static int div(int a,int b){
         String divPath = "D:\\univer\\SISPRO\\TestModule\\div.jar";
